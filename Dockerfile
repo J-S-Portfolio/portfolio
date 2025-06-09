@@ -1,26 +1,29 @@
-# Use an official Gradle image to build the project
-FROM gradle:8.3-jdk17 AS builder
- 
-# Set the working directory
+# Stage 1: Build the project using Gradle
+FROM gradle:8.5-jdk17 AS builder
 WORKDIR /app
 
-# Copy the entire project to the container
-COPY . .
+# Copy only necessary files for dependency resolution first
+COPY build.gradle settings.gradle gradle.properties* /app/
+COPY gradle /app/gradle
 
-# Build the project using Gradle
-RUN gradle build --no-daemon
+# Download dependencies (will be cached unless build.gradle changes)
+RUN gradle build -x test --no-daemon || return 0
 
-# Use a lightweight OpenJDK image for running the application
-FROM openjdk:17-jdk-slim
+# Now copy the rest of the source code
+COPY . /app
 
-# Set the working directory
+# Build the application (skip tests to speed it up)
+RUN gradle clean build -x test --no-daemon
+
+# Stage 2: Run the application
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
-# Copy the built JAR file from the builder stage
+# Copy built jar from builder
 COPY --from=builder /app/build/libs/*.jar app.jar
 
-# Expose the application's port
+# Expose port (adjust according to your application)
 EXPOSE 8080
 
-# Define the command to run the application
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]

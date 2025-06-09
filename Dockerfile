@@ -1,7 +1,7 @@
 # Stage 1: Build the Spring Boot app using Gradle
 FROM gradle:8.5-jdk17 AS builder
 WORKDIR /app
-
+ 
 # Copy everything at once (simplifies and avoids mainClass error)
 COPY . .
 

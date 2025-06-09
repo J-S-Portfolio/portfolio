@@ -1,28 +1,21 @@
-# Stage 1: Build the project using Gradle
+# Stage 1: Build the Spring Boot app using Gradle
 FROM gradle:8.5-jdk17 AS builder
 WORKDIR /app
 
-# Copy only necessary files for dependency resolution first
-COPY build.gradle settings.gradle gradle.properties* /app/
-COPY gradle /app/gradle
+# Copy everything at once (simplifies and avoids mainClass error)
+COPY . .
 
-# Download dependencies (will be cached unless build.gradle changes)
-RUN gradle build -x test --no-daemon || return 0
-
-# Now copy the rest of the source code
-COPY . /app
-
-# Build the application (skip tests to speed it up)
+# Build the application (skip tests to save time)
 RUN gradle clean build -x test --no-daemon
 
-# Stage 2: Run the application
+# Stage 2: Run the built Spring Boot JAR
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
-# Copy built jar from builder
+# Copy only the generated JAR from the build stage
 COPY --from=builder /app/build/libs/*.jar app.jar
 
-# Expose port (adjust according to your application)
+# Expose application port (update if your app uses another port)
 EXPOSE 8080
 
 # Run the application

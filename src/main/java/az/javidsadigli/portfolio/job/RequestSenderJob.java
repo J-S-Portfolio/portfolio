@@ -18,13 +18,13 @@ public class RequestSenderJob
     @Scheduled(fixedRate = 60000)
     private void execute()
     {
-        log.info("Job execution started.");
+        log.debug("Job execution started.");
         this.sendRequestToRequestSender();
     }
 
     private void sendRequestToRequestSender()
     {
         String response = requestSenderClient.getBaseUrl();
-        log.info("Request sender server response : {}", response);
+        log.debug("Request sender server response : {}", response);
     }
 }

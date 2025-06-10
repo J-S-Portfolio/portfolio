@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController 
 {
-    @GetMapping(value = "/")
-    public String testUrl()
+    @GetMapping(value = "/test-server")
+    public String testServer()
     {
-        return "Welcome to Portfolio of JavidSadigli";
-    }    
+        return "Portfolio server is on";
+    }
+    
 }

@@ -1,15 +1,23 @@
 package az.javidsadigli.portfolio.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+@RequiredArgsConstructor
 public class MainController 
 {
-    @GetMapping(value = "/test-server")
-    public String testServer()
+    private static final String LOG_TEMPLATE = "{} request to {}";
+
+    @GetMapping(value = "/")
+    public String getHomePage(Model model)
     {
-        return "Portfolio server is on";
+        log.info(LOG_TEMPLATE, "GET", "/");
+        return "home";
     }
-    
 }

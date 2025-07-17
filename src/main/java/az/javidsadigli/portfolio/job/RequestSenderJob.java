@@ -15,7 +15,7 @@ public class RequestSenderJob
 {
     private final RequestSenderClient requestSenderClient;
 
-    // @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 60000)
     private void execute()
     {
         log.debug("Job execution started.");

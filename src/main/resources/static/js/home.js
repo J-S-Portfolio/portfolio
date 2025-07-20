@@ -1,3 +1,5 @@
+const terminalPromptText = "javidsadigli:~$ ";
+
 const terminal = document.getElementById("terminal");
 let currentInput = null;
 
@@ -7,7 +9,7 @@ function addPrompt() {
 
   const prompt = document.createElement("span");
   prompt.className = "prompt";
-  prompt.textContent = "javidsadigli:~$ ";
+  prompt.textContent = terminalPromptText;
 
   const inputWrapper = document.createElement("span");
   inputWrapper.className = "input-wrapper";
@@ -21,7 +23,7 @@ function addPrompt() {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevent newline insertion
       const command = inputArea.innerText.trim();
-      line.innerHTML = `<span class="prompt">javidsadigli:~$ ${command}</span>`;
+      line.innerHTML = `<span class="prompt">${terminalPromptText}${command}</span>`;
       runCommand(command);
     }
   });
@@ -38,7 +40,7 @@ function addPrompt() {
 
 function runCommand(cmd) {
   const output = document.createElement("div");
-  output.textContent = fakeCommand(cmd);
+  output.textContent = getCommandOutput(cmd);
   if (cmd.trim() === "clear") {
     terminal.innerHTML = "";
   } else {
@@ -47,7 +49,7 @@ function runCommand(cmd) {
   addPrompt();
 }
 
-function fakeCommand(cmd) {
+function getCommandOutput(cmd) {
   switch (cmd.trim()) {
     default:
       return `Command not found: ${cmd}`;

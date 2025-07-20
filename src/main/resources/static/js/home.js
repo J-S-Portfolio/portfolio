@@ -50,6 +50,12 @@ function runCommand(cmd)
     {
         terminal.innerHTML = "";
     } 
+    else if(cmd.trim() === "cv")
+    {
+        output.textContent = "Downloading CV..."; 
+        terminal.appendChild(output);
+        downloadFile("/cv/javid_sadigli_cv.pdf", "JavidSadigli.pdf");
+    }
     else 
     {
         terminal.appendChild(output);
@@ -62,6 +68,14 @@ function getCommandOutput(cmd)
 {
     switch (cmd.trim()) 
     {
+        case "help": 
+            return `
+HELP SYSTEM OF JAVID SADIGLI'S WEBSITE
+
+    help            Displays a list of commands that can be runned 
+    clear           Clears the console
+    cv              Downloads CV of Javid Sadigli
+            `;
         default:
             return `Command not found: ${cmd}`;
     }

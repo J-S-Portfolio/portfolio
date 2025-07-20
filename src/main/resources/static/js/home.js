@@ -49,16 +49,6 @@ function runCommand(cmd) {
 
 function fakeCommand(cmd) {
   switch (cmd.trim()) {
-    case "help":
-      return "Available commands:\nhelp\nabout\nclear\n\n";
-    case "about":
-      return "This is a fake terminal created with HTML/CSS/JS.";
-    case "clear":
-      return "";
-    case "":
-      return "";
-    case "resul": 
-        return "qehbe";
     default:
       return `Command not found: ${cmd}`;
   }

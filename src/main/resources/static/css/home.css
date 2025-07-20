@@ -1,0 +1,43 @@
+body {
+  background-color: #000;
+  color: #0f0;
+  font-family: monospace;
+  padding: 10px;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  cursor: text;
+}
+
+#terminal {
+  overflow-y: auto;
+  height: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.prompt {
+  color: #0f0;
+}
+
+.input-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.input-area {
+  display: inline-block;
+  outline: none;
+  color: #0f0;
+  background: transparent;
+  font-family: monospace;
+  font-size: 1em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

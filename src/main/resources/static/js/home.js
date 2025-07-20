@@ -76,7 +76,9 @@ HELP SYSTEM OF JAVID SADIGLI'S WEBSITE
     clear           Clears the console
     cv              Downloads CV of Javid Sadigli
     about           Gives a description about Javid Sadigli
+    contact         Shows contact information to reach Javid Sadigli
             `;
+
         case "about": 
             return `
 About Javid Sadigli: 
@@ -87,6 +89,16 @@ About Javid Sadigli:
         orchestration, and Prometheus with Grafana for monitoring and observability. Committed to writing clean, maintainable code 
         and collaborating effectively with cross-functional teams to deliver reliable and impactful software solutions.
             `;
+
+        case "contact": 
+            return `
+Contact information of Javid Sadigli: 
+
+    Email: j.sadigli@ufaz.az
+    Phone number: +994 50 790 55 30
+    LinkedIn: https://www.linkedin.com/in/cavidsad%C4%B1ql%C4%B1/
+            `;
+
         default:
             return `Command not found: ${cmd}`;
     }

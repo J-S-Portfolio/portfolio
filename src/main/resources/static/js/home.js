@@ -75,6 +75,17 @@ HELP SYSTEM OF JAVID SADIGLI'S WEBSITE
     help            Displays a list of commands that can be runned 
     clear           Clears the console
     cv              Downloads CV of Javid Sadigli
+    about           Gives a description about Javid Sadigli
+            `;
+        case "about": 
+            return `
+About Javid Sadigli: 
+
+        Experienced Software Engineer with a strong focus on Java and Spring Boot for building scalable, high-performance backend 
+        systems. Skilled in designing and implementing RESTful APIs, developing microservices architectures, and working with both 
+        SQL and NoSQL databases. Proficient in leveraging modern tools and platforms including Kubernetes for container 
+        orchestration, and Prometheus with Grafana for monitoring and observability. Committed to writing clean, maintainable code 
+        and collaborating effectively with cross-functional teams to deliver reliable and impactful software solutions.
             `;
         default:
             return `Command not found: ${cmd}`;

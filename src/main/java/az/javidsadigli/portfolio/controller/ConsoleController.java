@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import az.javidsadigli.portfolio.service.ConsoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import az.javidsadigli.portfolio.service.ConsoleService;
 
 @Slf4j
 @RestController

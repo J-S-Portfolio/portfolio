@@ -27,7 +27,7 @@ function addPrompt()
             e.preventDefault(); // Prevent newline insertion
             const command = inputArea.innerText.trim();
             line.innerHTML = `<span class="prompt">${terminalPromptText}${command}</span>`;
-            runCommand2(command);
+            runCommand(command);
         }
     });
 
@@ -41,32 +41,15 @@ function addPrompt()
     terminal.scrollTop = terminal.scrollHeight;
 }
 
-function runCommand(cmd) 
+function runCommand(cmd)
 {
     const output = document.createElement("div");
-    output.textContent = getCommandOutput(cmd);
 
-    if (cmd.trim() === "clear") 
+    if(cmd.trim() === '')
     {
-        terminal.innerHTML = "";
-    } 
-    else if(cmd.trim() === "cv")
-    {
-        output.textContent = "Downloading CV..."; 
-        terminal.appendChild(output);
-        downloadFile("/cv/javid_sadigli_cv.pdf", "JavidSadigli.pdf");
+        addPrompt();
+        return; 
     }
-    else 
-    {
-        terminal.appendChild(output);
-    }
-
-    addPrompt();
-}
-
-function runCommand2(cmd)
-{
-    const output = document.createElement("div");
 
     getCommandOutput(cmd)
         .then(cmdOutput => {

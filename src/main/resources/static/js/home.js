@@ -3,6 +3,9 @@ const terminalPromptText = "javidsadigli:~$ ";
 const terminal = document.getElementById("terminal");
 let currentInput = null;
 
+let commandHistory = [];
+let currentCommandIndex = 0, lastCommandIndex = 0;
+
 function addPrompt() 
 {
     const line = document.createElement("div");
@@ -27,7 +30,46 @@ function addPrompt()
             e.preventDefault(); // Prevent newline insertion
             const command = inputArea.innerText.trim();
             line.innerHTML = `<span class="prompt">${terminalPromptText}${command}</span>`;
+
+            currentCommandIndex = lastCommandIndex;
+
+            if(commandHistory[lastCommandIndex - 1] != command)
+            {
+                commandHistory.push(command);
+                currentCommandIndex = ++lastCommandIndex;
+            }
+
             runCommand(command);
+        }
+
+        if(e.key === "ArrowUp")
+        {
+            e.preventDefault();
+
+            if(currentCommandIndex > 0)
+            {
+                currentCommandIndex--; 
+                inputArea.innerText = commandHistory[currentCommandIndex];
+                placeCaretAtEnd(inputArea);
+            }
+        }
+
+        if(e.key === "ArrowDown")
+        {
+            e.preventDefault();
+
+            if(currentCommandIndex < lastCommandIndex - 1)
+            {
+                currentCommandIndex++; 
+                inputArea.innerText = commandHistory[currentCommandIndex];
+                placeCaretAtEnd(inputArea);
+            }
+            else if(currentCommandIndex == lastCommandIndex - 1)
+            {
+                currentCommandIndex++; 
+                inputArea.innerText = "";
+                placeCaretAtEnd(inputArea);
+            }
         }
     });
 
@@ -89,6 +131,16 @@ function downloadFile(url, filename)
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
+
+function placeCaretAtEnd(el) 
+{
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
 }
 
 // Focus input on any click

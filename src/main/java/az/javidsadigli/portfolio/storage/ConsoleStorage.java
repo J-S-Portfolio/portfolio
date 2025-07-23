@@ -22,7 +22,7 @@ public class ConsoleStorage
                 help            Displays a list of commands that can be runned 
                 clear           Clears the console
                 cv              Downloads CV of Javid Sadigli
-                about           Gives a description about Javid Sadigli
+                about           Gives information about Javid Sadigli
                 contact         Shows contact information to reach Javid Sadigli
 
             """);
@@ -55,7 +55,8 @@ public class ConsoleStorage
     {
         String output = this.commandOutputs.get(command);
 
-        return Optional.ofNullable(output)
-            .orElse(String.format("Command not found : '%s'", command));
+        return Optional.ofNullable(output).orElse(String.format(
+            "Command not found : '%s'.\nNote: You can run 'help' command to see all commands that can be runned.", 
+            command));
     }    
 }

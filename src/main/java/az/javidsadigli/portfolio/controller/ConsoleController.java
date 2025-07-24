@@ -27,6 +27,6 @@ public class ConsoleController
     public String getCommandOutput(@RequestParam String command)
     {
         log.info(LOG_TEMPLATE, "GET", "/command-output");
-        return consoleService.getCommandOutput(command);
+        return consoleService.executeCommand(command);
     }
 }

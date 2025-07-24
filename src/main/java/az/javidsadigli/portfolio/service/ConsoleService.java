@@ -2,9 +2,10 @@ package az.javidsadigli.portfolio.service;
 
 import org.springframework.stereotype.Service;
 
-import az.javidsadigli.portfolio.storage.ConsoleStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import az.javidsadigli.portfolio.storage.ConsoleStorage;
 
 @Slf4j
 @Service

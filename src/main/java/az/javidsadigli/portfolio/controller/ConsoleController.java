@@ -26,7 +26,7 @@ public class ConsoleController
     @GetMapping(value = "/command-output")
     public String getCommandOutput(@RequestParam String command)
     {
-        log.info(LOG_TEMPLATE, "GET", "/command-output");
-        return consoleService.getCommandOutput(command);
+        log.info(LOG_TEMPLATE, "GET", "/command-output?command=" + command);
+        return consoleService.executeCommand(command);
     }
 }

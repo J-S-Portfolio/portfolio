@@ -33,7 +33,7 @@ jobs:
       - name: Compare Versions
         run: |
           echo "Comparing PR version ($PR_VERSION) with main version ($MAIN_VERSION)..."
-          if [ "$PR_VERSION" == "$MAIN_VERSION" ]; then
+          if [ "$PR_VERSION" <= "$MAIN_VERSION" ]; then
             echo "ERROR: Version was not increased in VERSION file."
             exit 1
           fi

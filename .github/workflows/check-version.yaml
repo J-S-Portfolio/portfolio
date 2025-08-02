@@ -3,7 +3,7 @@ name: Check Version Bump on PR
 on:
   pull_request:
     branches:
-      - main  # Triggers on PRs to main
+      - main  
 
 jobs:
   check_version:

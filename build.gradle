@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'az.javidsadigli'
-version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {

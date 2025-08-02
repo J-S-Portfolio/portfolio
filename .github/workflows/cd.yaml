@@ -1,0 +1,45 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Read version from file
+        id: get_version
+        run: |
+          VERSION=$(cat VERSION)
+          echo "Version is $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Create Git Tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag $VERSION
+          git push origin $VERSION
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Trigger Render API
+      env:
+        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      run: |
+        curl --request POST \
+        --url https://api.render.com/v1/services/srv-d13jefe3jp1c73d5a5f0/deploys \
+        --header 'accept: application/json' \
+        --header "authorization: Bearer ${RENDER_API_KEY}" \
+        --header 'content-type: application/json'

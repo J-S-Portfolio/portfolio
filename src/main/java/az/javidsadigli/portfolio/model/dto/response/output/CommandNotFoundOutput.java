@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = false)
-public class CommandNotFoundOutput 
+public class CommandNotFoundOutput extends BaseCommandOutput
 {
     private String commandNotFoundMessage;
 }

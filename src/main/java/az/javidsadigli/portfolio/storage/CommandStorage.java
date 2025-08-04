@@ -7,11 +7,11 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConsoleStorage 
+public class CommandStorage 
 {
     private Map<String, String> commandOutputs; 
 
-    public ConsoleStorage() 
+    public CommandStorage() 
     {
         this.commandOutputs = new HashMap<String, String>(); 
 

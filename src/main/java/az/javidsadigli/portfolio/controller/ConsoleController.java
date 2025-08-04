@@ -17,7 +17,7 @@ import az.javidsadigli.portfolio.service.ConsoleService;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/v1/console")
+@RequestMapping(value = "/api/console")
 public class ConsoleController 
 {
     private static final String LOG_TEMPLATE = "{} request to /api/v1/console{}";

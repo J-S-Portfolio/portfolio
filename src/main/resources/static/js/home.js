@@ -118,7 +118,7 @@ function runCommand(cmd)
 
 async function getCommandOutput(cmd) 
 {
-    const response = await fetch(`/api/v1/console/command-output?command=${cmd.trim()}`)
+    const response = await fetch(`/api/console/command-output?command=${cmd.trim()}`)
 
     return response.text();
 }

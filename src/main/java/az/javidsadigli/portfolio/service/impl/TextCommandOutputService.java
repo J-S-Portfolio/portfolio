@@ -14,7 +14,7 @@ import az.javidsadigli.portfolio.storage.CommandStorage;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TextCommandOutputService implements CommandExecutionService<TextOutput>
+public class TextCommandOutputService implements CommandExecutionService
 {
     private final CommandStorage commandStorage; 
 

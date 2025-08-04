@@ -2,7 +2,6 @@ package az.javidsadigli.portfolio.storage;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -53,10 +52,13 @@ public class CommandStorage
     
     public String getCommandOutput(String command) 
     {
-        String output = this.commandOutputs.get(command);
-
-        return Optional.ofNullable(output).orElse(String.format(
-            "Command not found : '%s'.\nNote: You can run 'help' command to see all commands that can be runned.", 
-            command));
-    }    
+        return this.commandOutputs.get(command);
+    } 
+    
+    public String getCommandNotFoundOutput(String command)
+    {
+        return String.format(
+            "Command not found: '%s'.\nNote: You can run 'help' command to see all commands that can be runned.", 
+            command);
+    }
 }

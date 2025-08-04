@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import az.javidsadigli.portfolio.enums.CommandOutputType;
 import az.javidsadigli.portfolio.model.dto.response.BaseCommandResponse;
 import az.javidsadigli.portfolio.model.dto.response.output.TextOutput;
 import az.javidsadigli.portfolio.service.CommandExecutionService;
@@ -30,6 +31,7 @@ public class TextCommandOutputService implements CommandExecutionService<TextOut
                     TextOutput.builder()
                         .text(textOutput)
                         .build())
+                .outputType(CommandOutputType.TEXT_OUTPUT)
                 .build();
     }
 }

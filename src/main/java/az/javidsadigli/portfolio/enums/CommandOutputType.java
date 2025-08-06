@@ -5,6 +5,6 @@ public enum CommandOutputType
     NONE, 
 
     TEXT_OUTPUT,
-    EXECUTION,
+    ACTION,
     COMMAND_NOT_FOUND
 }

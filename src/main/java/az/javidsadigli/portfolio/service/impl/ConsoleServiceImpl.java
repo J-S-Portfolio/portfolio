@@ -15,7 +15,8 @@ import az.javidsadigli.portfolio.service.ConsoleService;
 public class ConsoleServiceImpl implements ConsoleService
 {
     private final TextCommandOutputService textCommandOutputService; 
-    private final CommandNotFoundService commandNotFoundService; 
+    private final CommandNotFoundService commandNotFoundService;
+    private final ActionOutputService actionOutputService;  
 
     public BaseCommandResponse<? extends BaseCommandOutput> executeCommand(String command)
     {
@@ -24,7 +25,10 @@ public class ConsoleServiceImpl implements ConsoleService
         BaseCommandResponse<? extends BaseCommandOutput> executionResponse; 
         
         executionResponse = textCommandOutputService.executeCommand(command); 
+        if(executionResponse != null)
+            return executionResponse; 
 
+        executionResponse = actionOutputService.executeCommand(command); 
         if(executionResponse != null)
             return executionResponse; 
         

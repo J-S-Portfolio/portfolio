@@ -12,7 +12,7 @@ public class GeneralActionsService implements ActionExecutionService
 {
     public ActionOutput<? extends BaseAction> executeAction(String command)
     {
-        if(command == "clear")
+        if(command.equals("clear"))
             return ActionOutput.<BaseAction>builder()
                     .actionType(ActionType.CLEAR_SCREEN)
                     .action(null)

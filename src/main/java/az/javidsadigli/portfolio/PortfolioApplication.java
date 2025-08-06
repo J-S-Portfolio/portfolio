@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableFeignClients
 @SpringBootApplication
-public class PortfolioApplication {
-
-	public static void main(String[] args) {
+public class PortfolioApplication 
+{
+	public static void main(String[] args) 
+	{
 		SpringApplication.run(PortfolioApplication.class, args);
 	}
-
 }

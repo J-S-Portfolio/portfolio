@@ -94,22 +94,33 @@ function runCommand(cmd)
     }
 
     getCommandOutput(cmd)
-        .then(cmdOutput => {
-            output.textContent = cmdOutput;
-
-            if (cmd.trim() === "clear") 
+        .then(cmdResponse => {
+            
+            if(cmdResponse.outputType === "COMMAND_NOT_FOUND")
             {
-                terminal.innerHTML = "";
-            } 
-            else if(cmd.trim() === "cv")
-            {
-                output.textContent = "Downloading CV..."; 
-                terminal.appendChild(output);
-                downloadFile("/cv/javid_sadigli_cv.pdf", "JavidSadigli.pdf");
+                output.textContent = cmdResponse.commandOutput.commandNotFoundMessage;
+                terminal.appendChild(output); 
             }
-            else 
+            else if(cmdResponse.outputType === "TEXT_OUTPUT")
             {
-                terminal.appendChild(output);
+                output.textContent = cmdResponse.commandOutput.text; 
+                terminal.appendChild(output); 
+            }
+            else if(cmdResponse.outputType === "ACTION")
+            {
+                if(cmdResponse.commandOutput.actionType === "CLEAR_SCREEN")
+                {
+                    terminal.innerHTML = ""; 
+                }
+                else if(cmdResponse.commandOutput.actionType === "DOWNLOAD_FILE")
+                {
+                    output.textContent = "Downloading file..."; 
+                    terminal.appendChild(output);
+                    downloadFile(
+                        cmdResponse.commandOutput.action.filePath,
+                        cmdResponse.commandOutput.action.fileName
+                    );
+                }
             }
 
             addPrompt();
@@ -119,8 +130,7 @@ function runCommand(cmd)
 async function getCommandOutput(cmd) 
 {
     const response = await fetch(`/api/console/command-output?command=${cmd.trim()}`)
-
-    return response.text();
+    return response.json();
 }
 
 function downloadFile(url, filename) 

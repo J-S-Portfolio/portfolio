@@ -25,6 +25,7 @@ public class FileDownloadActionService implements ActionExecutionService
                     .action(
                         DownloadFileAction.builder()
                             .filePath(cvPath)
+                            .fileName(cvName)
                             .build())
                     .actionType(ActionType.DOWNLOAD_FILE)
                     .build(); 

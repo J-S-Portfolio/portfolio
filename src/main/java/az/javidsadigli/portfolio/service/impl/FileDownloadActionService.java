@@ -15,6 +15,9 @@ public class FileDownloadActionService implements ActionExecutionService
     @Value(value = "${application.file-paths.cv}")
     private String cvPath;
 
+    @Value(value = "${application.file-names.cv}")
+    private String cvName; 
+
     public ActionOutput<? extends BaseAction> executeAction(String command)
     {
         if (command.equals("cv")) 

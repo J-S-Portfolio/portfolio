@@ -10,4 +10,5 @@ import lombok.EqualsAndHashCode;
 public class DownloadFileAction extends BaseAction
 {
     private String filePath; 
+    private String fileName; 
 }

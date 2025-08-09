@@ -4,5 +4,6 @@ public enum ActionType
 {
     NONE, 
 
-    CLEAR_SCREEN
+    CLEAR_SCREEN,
+    DOWNLOAD_FILE
 }

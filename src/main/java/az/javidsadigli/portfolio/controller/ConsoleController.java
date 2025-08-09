@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import az.javidsadigli.portfolio.model.dto.response.BaseCommandResponse;
+import az.javidsadigli.portfolio.model.dto.response.output.BaseCommandOutput;
 import az.javidsadigli.portfolio.service.ConsoleService;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/v1/console")
+@RequestMapping(value = "/api/console")
 public class ConsoleController 
 {
     private static final String LOG_TEMPLATE = "{} request to /api/v1/console{}";
@@ -24,7 +26,7 @@ public class ConsoleController
 
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(value = "/command-output")
-    public String getCommandOutput(@RequestParam String command)
+    public BaseCommandResponse<? extends BaseCommandOutput> getCommandOutput(@RequestParam String command)
     {
         log.info(LOG_TEMPLATE, "GET", "/command-output?command=" + command);
         return consoleService.executeCommand(command);

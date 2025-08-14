@@ -1,4 +1,4 @@
-name: Check Version Bump on PR
+run-name: CI Pipeline for pull request
 
 on:
   pull_request:

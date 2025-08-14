@@ -1,4 +1,4 @@
-name: CD Pipeline
+run-name: CD Pipeline for new version
 
 on:
   push:

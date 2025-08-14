@@ -3,14 +3,27 @@ package az.javidsadigli.portfolio.storage;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CommandStorage 
 {
     private Map<String, String> commandOutputs; 
+    
+    @Value("${application.contact-information.email}")
+    private String emailInfo; 
 
-    public CommandStorage() 
+    @Value("${application.contact-information.phone}")
+    private String phoneInfo; 
+
+    @Value("${application.contact-information.linkedin-url}")
+    private String linkedinUrlInfo; 
+
+    @PostConstruct
+    public void initialize() 
     {
         this.commandOutputs = new HashMap<String, String>(); 
 
@@ -39,15 +52,15 @@ public class CommandStorage
 
             """);
 
-        this.commandOutputs.put("contact", """
+        this.commandOutputs.put("contact", String.format("""
 
             CONTACT INFORMATION OF JAVID SADIGLI
 
-                Email: j.sadigli@ufaz.az
-                Phone number: +994 50 790 55 30
-                LinkedIn: https://www.linkedin.com/in/cavidsad%C4%B1ql%C4%B1/
+                Email: %s
+                Phone number: %s
+                LinkedIn: %s
                 
-            """);
+            """, emailInfo, phoneInfo, linkedinUrlInfo));
     }   
     
     public String getCommandOutput(String command) 

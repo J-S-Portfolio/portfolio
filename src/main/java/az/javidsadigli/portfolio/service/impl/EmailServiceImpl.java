@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import az.javidsadigli.portfolio.service.EmailService;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService
@@ -27,5 +29,7 @@ public class EmailServiceImpl implements EmailService
         message.setText(body);
 
         mailSender.send(message);
+
+        log.debug("Email sent to {}", emailReceiver);
     }
 }

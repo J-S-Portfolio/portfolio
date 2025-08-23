@@ -25,7 +25,10 @@ public class MailController
         @RequestParam String subject, 
         @RequestParam String body)
     {
-        log.info(LOG_TEMPLATE, "POST", "/send-email");
+        log.info(
+            LOG_TEMPLATE, "POST", 
+            "/send-email?subject=" + subject + "&body=" + body);
+
         emailService.sendEmail(subject, body);
     }
 }

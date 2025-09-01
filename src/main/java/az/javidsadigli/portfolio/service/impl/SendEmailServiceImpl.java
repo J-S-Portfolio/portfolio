@@ -32,7 +32,7 @@ public class SendEmailServiceImpl implements SendEmailService
             sb.append("User email: ").append(request.getUserEmail()).append("\n");
 
         if(request.getUserPhone() != null && !request.getUserPhone().isEmpty())
-            sb.append("User phone: ").append(request.getUserPhone()).append("\n");
+            sb.append("User phone: ").append(request.getUserPhone()).append("\n\n");
 
         sb.append("Message:\n").append(request.getBody()).append("\n\n");
 

@@ -28,6 +28,8 @@ public class SendEmailServiceImpl implements SendEmailService
 
         sb.append("There is a new message from your portfolio.\n\n");
 
+        sb.append("User full name: ").append(request.getUserFullName()).append("\n");
+
         if(isEmailValid(request.getUserEmail()))
             sb.append("User email: ").append(request.getUserEmail()).append("\n");
 

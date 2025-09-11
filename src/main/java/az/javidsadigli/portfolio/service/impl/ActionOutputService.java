@@ -16,6 +16,7 @@ public class ActionOutputService implements CommandExecutionService
 {
     private final GeneralActionsService generalActionsService; 
     private final FileDownloadActionService fileDownloadActionService; 
+    private final SendEmailActionService sendEmailActionService;
 
     @Override
     public BaseCommandResponse<ActionOutput<? extends BaseAction>> executeCommand(String command)
@@ -35,6 +36,13 @@ public class ActionOutputService implements CommandExecutionService
         }
 
         actionOutput = fileDownloadActionService.executeAction(command);
+        if (actionOutput != null) 
+        {
+            commandResponse.setCommandOutput(actionOutput);
+            return commandResponse;     
+        }
+
+        actionOutput = sendEmailActionService.executeAction(command);
         if (actionOutput != null) 
         {
             commandResponse.setCommandOutput(actionOutput);

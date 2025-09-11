@@ -1,14 +1,15 @@
 package az.javidsadigli.portfolio.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import az.javidsadigli.portfolio.service.EmailService;
+import az.javidsadigli.portfolio.model.dto.request.SendEmailRequest;
+import az.javidsadigli.portfolio.service.SendEmailService;
 
 @Slf4j
 @RestController
@@ -18,17 +19,12 @@ public class MailController
 {
     private static final String LOG_TEMPLATE = "{} request to /api/mail{}";
 
-    private final EmailService emailService;
+    private final SendEmailService sendEmailService;
 
     @PostMapping(value = "/send-email")
-    public void sendEmail(
-        @RequestParam String subject, 
-        @RequestParam String body)
+    public void sendEmail(@RequestBody SendEmailRequest request)
     {
-        log.info(
-            LOG_TEMPLATE, "POST", 
-            "/send-email?subject=" + subject + "&body=" + body);
-
-        emailService.sendEmail(subject, body);
+        log.info(LOG_TEMPLATE, "POST", "/send-email");
+        sendEmailService.sendEmail(request);
     }
 }

@@ -36,6 +36,7 @@ public class CommandStorage
                 cv              Downloads CV of Javid Sadigli
                 about           Gives information about Javid Sadigli
                 contact         Shows contact information to reach Javid Sadigli
+                send-email       Sends an email to Javid Sadigli
 
             """);
 

@@ -31,11 +31,11 @@ public class CommandStorage
 
             HELP SYSTEM OF JAVID SADIGLI'S WEBSITE
 
-                help            Displays a list of commands that can be runned 
-                clear           Clears the console
-                cv              Downloads CV of Javid Sadigli
-                about           Gives information about Javid Sadigli
-                contact         Shows contact information to reach Javid Sadigli
+                help             Displays a list of commands that can be runned 
+                clear            Clears the console
+                cv               Downloads CV of Javid Sadigli
+                about            Gives information about Javid Sadigli
+                contact          Shows contact information to reach Javid Sadigli
                 send-email       Sends an email to Javid Sadigli
 
             """);

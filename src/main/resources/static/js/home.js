@@ -63,7 +63,6 @@ function addPrompt()
                                 terminal.appendChild(output);
                                 emailData = [];
                                 addPrompt();
-                                return; 
                             }); 
                     }
                     else 
@@ -210,7 +209,7 @@ async function sendEmail(body)
         }
     );
 
-    return response.json();
+    return response;
 }
 
 function prepareEmailRequestBody(keys, values)

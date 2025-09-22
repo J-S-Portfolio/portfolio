@@ -6,7 +6,7 @@ let currentInput = null;
 let commandHistory = [];
 let currentCommandIndex = 0, lastCommandIndex = 0;
 
-let emailSendingMode = false; 
+let emailSendingMode = false, emailSendingModeWillBeDisabled = false; 
 let emailPrompts = [
     "Enter your full name: ", 
     "Enter your email address: ", 
@@ -52,21 +52,19 @@ function addPrompt()
                 }
                 else 
                 {
-                    emailSendingMode = false;
+                    emailSendingModeWillBeDisabled = true; 
                     if(input.toLowerCase() === "yes")
                     {
                         const requestBody = prepareEmailRequestBody(emailKeys, emailData);
                         sendEmail(requestBody)
                             .then(response => {
-
+                                const output = document.createElement("div");
+                                output.textContent = "Email has been sent successfully.";
+                                terminal.appendChild(output);
+                                emailData = [];
+                                addPrompt();
+                                return; 
                             }); 
-                        
-                        const output = document.createElement("div");
-                        output.textContent = "Email has been sent successfully.";
-                        terminal.appendChild(output);
-                        emailData = [];
-                        addPrompt();
-                        return; 
                     }
                     else 
                     {
@@ -91,9 +89,18 @@ function addPrompt()
             }
 
             if(!emailSendingMode)
+            {
                 runCommand(input);
+            }
+            else if(emailSendingModeWillBeDisabled)
+            {
+                emailSendingModeWillBeDisabled = false; 
+                emailSendingMode = false; 
+            }
             else 
+            {
                 addPrompt();
+            }
         }
 
         if(e.key === "ArrowUp")

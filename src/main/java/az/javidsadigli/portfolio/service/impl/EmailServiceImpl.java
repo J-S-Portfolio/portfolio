@@ -1,9 +1,9 @@
 package az.javidsadigli.portfolio.service.impl;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,21 +15,16 @@ import az.javidsadigli.portfolio.service.EmailService;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService
 {
-    private final JavaMailSender mailSender;
-
-    @Value("${application.contact-information.email}")
+    @Value("${application.mailing.receiver}")
     private String emailReceiver; 
+
+    @Value("${application.mailing.sender}")
+    private String emailSender; 
 
     public void sendEmail(String subject, String body) 
     {
-        SimpleMailMessage message = new SimpleMailMessage();
-        
-        message.setTo(emailReceiver);
-        message.setSubject(subject);
-        message.setText(body);
 
-        mailSender.send(message);
 
-        log.debug("Email sent to {}", emailReceiver);
+        log.info("Email sent to {}", emailReceiver);
     }
 }

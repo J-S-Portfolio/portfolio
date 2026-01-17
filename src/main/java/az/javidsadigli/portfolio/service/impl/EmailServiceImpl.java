@@ -1,12 +1,21 @@
 package az.javidsadigli.portfolio.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.springframework.mail.javamail.JavaMailSender;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import sendinblue.ApiException;
+import sendinblue.ApiResponse;
+import sibApi.TransactionalEmailsApi;
+import sibModel.CreateSmtpEmail;
+import sibModel.SendSmtpEmail;
+import sibModel.SendSmtpEmailSender;
+import sibModel.SendSmtpEmailTo;
 
 import az.javidsadigli.portfolio.service.EmailService;
 
@@ -15,21 +24,36 @@ import az.javidsadigli.portfolio.service.EmailService;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService
 {
-    private final JavaMailSender mailSender;
+    private final TransactionalEmailsApi transactionalEmailsApi; 
 
-    @Value("${application.contact-information.email}")
-    private String emailReceiver; 
+    @Value("${application.mailing.receiver.mail}")
+    private String receiverMail; 
+
+    @Value("${application.mailing.sender.mail}")
+    private String senderMail; 
+
+    @Value("${application.mailing.sender.name}")
+    private String senderName; 
 
     public void sendEmail(String subject, String body) 
     {
-        SimpleMailMessage message = new SimpleMailMessage();
-        
-        message.setTo(emailReceiver);
-        message.setSubject(subject);
-        message.setText(body);
+        SendSmtpEmail email = new SendSmtpEmail();
 
-        mailSender.send(message);
+        email.setTo(List.of(new SendSmtpEmailTo().email(receiverMail)));
+        email.setSubject(subject);
+        email.setTextContent(body);
+        email.setSender(new SendSmtpEmailSender().name(senderName).email(senderMail));
 
-        log.debug("Email sent to {}", emailReceiver);
+        try
+        {        
+            ApiResponse<CreateSmtpEmail> response = transactionalEmailsApi.sendTransacEmailWithHttpInfo(email);
+            log.info("" + response.getStatusCode());
+        }
+        catch(ApiException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        log.info("Email sent to {}", receiverMail);
     }
 }

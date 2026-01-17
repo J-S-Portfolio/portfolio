@@ -1,12 +1,21 @@
 package az.javidsadigli.portfolio.service.impl;
 
-import java.io.IOException;
-
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import sendinblue.ApiException;
+import sendinblue.ApiResponse;
+import sibApi.TransactionalEmailsApi;
+import sibModel.CreateSmtpEmail;
+import sibModel.SendSmtpEmail;
+import sibModel.SendSmtpEmailSender;
+import sibModel.SendSmtpEmailTo;
 
 import az.javidsadigli.portfolio.service.EmailService;
 
@@ -15,16 +24,36 @@ import az.javidsadigli.portfolio.service.EmailService;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService
 {
-    @Value("${application.mailing.receiver}")
-    private String emailReceiver; 
+    private final TransactionalEmailsApi transactionalEmailsApi; 
 
-    @Value("${application.mailing.sender}")
-    private String emailSender; 
+    @Value("${application.mailing.receiver.mail}")
+    private String receiverMail; 
+
+    @Value("${application.mailing.sender.mail}")
+    private String senderMail; 
+
+    @Value("${application.mailing.sender.name}")
+    private String senderName; 
 
     public void sendEmail(String subject, String body) 
     {
+        SendSmtpEmail email = new SendSmtpEmail();
 
+        email.setTo(List.of(new SendSmtpEmailTo().email(receiverMail)));
+        email.setSubject(subject);
+        email.setTextContent(body);
+        email.setSender(new SendSmtpEmailSender().name(senderName).email(senderMail));
 
-        log.info("Email sent to {}", emailReceiver);
+        try
+        {        
+            ApiResponse<CreateSmtpEmail> response = transactionalEmailsApi.sendTransacEmailWithHttpInfo(email);
+            log.info("" + response.getStatusCode());
+        }
+        catch(ApiException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        log.info("Email sent to {}", receiverMail);
     }
 }

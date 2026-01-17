@@ -31,7 +31,7 @@ public class CommandStorage
 
             HELP SYSTEM OF JAVID SADIGLI'S WEBSITE
 
-                help             Displays a list of commands that can be runned 
+                help             Displays a list of executable commands
                 clear            Clears the console
                 cv               Downloads CV of Javid Sadigli
                 about            Gives information about Javid Sadigli
@@ -72,7 +72,7 @@ public class CommandStorage
     public String getCommandNotFoundOutput(String command)
     {
         return String.format(
-            "Command not found: '%s'.\nNote: You can run 'help' command to see all commands that can be runned.", 
+            "Command not found: '%s'.\nNote: You can run 'help' command to see all executable commands.", 
             command);
     }
 }

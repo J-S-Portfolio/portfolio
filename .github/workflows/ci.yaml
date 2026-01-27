@@ -34,7 +34,11 @@ jobs:
       - name: Compare Versions
         run: |
           echo "Comparing PR version ($PR_VERSION) with main version ($MAIN_VERSION)..."
-          if [ "$PR_VERSION" <= "$MAIN_VERSION" ]; then
+
+          PR_VER="${PR_VERSION#v}"
+          MAIN_VER="${MAIN_VERSION#v}"
+
+          if [ "$(printf '%s\n' "$MAIN_VER" "$PR_VER" | sort -V | head -n1)" = "$PR_VER" ]; then
             echo "ERROR: Version was not increased in VERSION file."
             exit 1
           fi

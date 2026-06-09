@@ -53,7 +53,7 @@ function addPrompt()
                 else 
                 {
                     emailSendingModeWillBeDisabled = true; 
-                    if(input.toLowerCase() === "yes")
+                    if(input.toLowerCase() === "yes" || input.toLowerCase() === "y")
                     {
                         const requestBody = prepareEmailRequestBody(emailKeys, emailData);
                         sendEmail(requestBody)

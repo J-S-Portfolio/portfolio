@@ -48,6 +48,11 @@ public class EmailServiceImpl implements EmailService
         }
         catch(ApiException exception)
         {
+            log.error("Code: {}", exception.getCode());
+            log.error("Message: {}", exception.getMessage());
+            log.error("ResponseBody: {}", exception.getResponseBody());
+            log.error("ResponseHeaders: {}", exception.getResponseHeaders());
+            
             log.error("An error happened while sending email : {}", exception.getMessage());
         }
 

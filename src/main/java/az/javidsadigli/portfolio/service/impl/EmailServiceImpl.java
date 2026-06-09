@@ -1,14 +1,13 @@
 package az.javidsadigli.portfolio.service.impl;
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+import az.javidsadigli.portfolio.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import sendinblue.ApiException;
 import sendinblue.ApiResponse;
 import sibApi.TransactionalEmailsApi;
@@ -16,8 +15,6 @@ import sibModel.CreateSmtpEmail;
 import sibModel.SendSmtpEmail;
 import sibModel.SendSmtpEmailSender;
 import sibModel.SendSmtpEmailTo;
-
-import az.javidsadigli.portfolio.service.EmailService;
 
 @Slf4j
 @Service
@@ -51,7 +48,7 @@ public class EmailServiceImpl implements EmailService
         }
         catch(ApiException exception)
         {
-            exception.printStackTrace();
+            log.error("An error happened while sending email : {}", exception.getMessage());
         }
 
         log.info("Email sent to {}", receiverMail);
